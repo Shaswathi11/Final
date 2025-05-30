@@ -11,4 +11,8 @@ describe('Upcoming Honda Bikes Listing', () => {
     NewBikesPage.searchbar();
     NewBikesPage.verifyURL();
   });
+  it('To verify navigate to "Upcoming Honda bike"',()=>{
+    NewBikesPage.visit();
+    
+  })
 });

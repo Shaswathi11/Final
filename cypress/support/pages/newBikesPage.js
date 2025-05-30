@@ -30,5 +30,26 @@ class NewBikesPage{
             expect(currentURL).to.eq(expectedURL);
         });
     }
+    navigationtab(){
+        cy.get('#headerNewVNavWrap nav ul.h-d-nav li a').
+        contains('NEW BIKES').
+        click({ force: true });
+    }
+    clickingupcomingtab(){
+         cy.get('[data-track-label="upcoming-tab"]').click({force:true});
+         cy.get('#upcoming-bikes > :nth-child(1) > #zw-cmnSilder > .pt-15 > .lnk-c').
+        click({ force: true });
+    }
+   
+    clickbrand(){
+        cy.scrollTo('bottom');
+        cy.contains('Honda').click({ force: true });
+    }
+    verifytext(){
+        cy.get('.fil-w > .mt-10').
+        invoke('text').
+        should('include', 'Upcoming Honda Bikes');
+
+    }
 }
 export default NewBikesPage;
