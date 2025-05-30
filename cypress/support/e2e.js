@@ -15,3 +15,10 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+
+Cypress.on('uncaught:exception', (err, runnable) => {
+    // Check if the error is related to getInstalledRelatedApps and ignore it.
+    if (err.message.includes('getInstalledRelatedApps')) {
+      return false; // Prevents Cypress from failing the test for this exception.
+    }
+  });
