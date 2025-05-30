@@ -16,5 +16,12 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     usedCarsPage.verifyAutoSuggestionVisible(testData.validCity);
   });
 
-
+  it('Test case - Select suggestion using uppercase input', () => {
+      usedCarsPage.visit1();
+      usedCarsPage.setViewport();
+      usedCarsPage.typeSearchKeyword(testData.searchKeyword);
+      usedCarsPage.selectFirstSuggestion();
+      usedCarsPage.verifyUrl(testData.expectedUrl);
+      usedCarsPage.verifyNoResultsMessage(testData.noResultsMessage);
+    });
 });
