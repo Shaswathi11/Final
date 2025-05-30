@@ -30,6 +30,8 @@ class NewBikesPage{
             expect(currentURL).to.eq(expectedURL);
         });
     }
+
+    
     navigationtab(){
         cy.get('#headerNewVNavWrap nav ul.h-d-nav li a').
         contains('NEW BIKES').
