@@ -13,14 +13,7 @@ describe('Upcoming Honda Bikes Listing', () => {
     newBikesPage.verifyURL();
   });
   it('To verify navigate to "Upcoming Honda bike"',()=>{
-    Cypress.on('uncaught:exception', (err, runnable) => {
-    
-        return false;
-      });
-    newBikesPage.visit();
-    newBikesPage.navigationtab();
-    newBikesPage.clickingupcomingtab();
-    newBikesPage.clickbrand();
-    newBikesPage.verifytext();
-  });
+    NewBikesPage.visit();
+    
+  })
 });
