@@ -1,0 +1,7 @@
+{
+    "validCity": "Chennai",
+    "validCityPartial": "Chenna",
+    "invalidCity": "Chennoai",
+    "expectedTitle": "Used Cars in Chennai "
+  }
+  
