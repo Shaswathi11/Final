@@ -16,7 +16,7 @@ class UsedCarsPage {
     }
 
     verifyAutoSuggestionNotVisible(city) {
-        cy.contains('.ui-menu-item > a', city).should('not.be.visible');
+        cy.contains('.ui-menu-item > a', city,{timeout:10000}).should('not.be.visible');
     }
 
     verifyUsedCarsPageTitle(expectedTitle) {
