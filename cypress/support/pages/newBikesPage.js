@@ -1,4 +1,5 @@
 class NewBikesPage{
+    
     visit(){
         cy.visit('https://www.zigwheels.com/');
         cy.viewport(1224, 768);
