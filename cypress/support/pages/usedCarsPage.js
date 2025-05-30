@@ -1,6 +1,6 @@
 class UsedCarsPage {
     visit() {
-        cy.visit('https://www.zigwheels.com/used-car/Dindigul');
+        cy.visit('/used-car/Dindigul');
     }
 
     typeCity(city) {
