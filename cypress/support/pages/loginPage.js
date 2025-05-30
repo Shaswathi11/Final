@@ -1,1 +1,0 @@
-cy.log('login')
