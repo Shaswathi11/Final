@@ -1,1 +1,1 @@
-cy.log('login')
+console.log('loginpage')
