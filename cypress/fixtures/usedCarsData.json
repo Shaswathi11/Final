@@ -2,6 +2,9 @@
     "validCity": "Chennai",
     "validCityPartial": "Chenna",
     "invalidCity": "Chennoai",
-    "expectedTitle": "Used Cars in Chennai "
-  }
+    "expectedTitle": "Used Cars in Chennai ",
+    "searchKeyword": "USED CARS IN CHENNAI",
+    "expectedUrl": "used-car/Chennai",
+    "noResultsMessage": "No results found for keyword 'used cars in chennai'"
+}
   
