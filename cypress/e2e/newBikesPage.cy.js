@@ -13,7 +13,7 @@ describe('Upcoming Honda Bikes Listing', () => {
     newBikesPage.verifyURL();
   });
   it('To verify navigate to "Upcoming Honda bike"',()=>{
-    Cypress.on('uncaught:exception', (err, runnable) => {Add commentMore actions
+    Cypress.on('uncaught:exception', (err, runnable) => {
     
         return false;
       });

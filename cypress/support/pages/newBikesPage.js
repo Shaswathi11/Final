@@ -1,4 +1,4 @@
-class NewBikesPage{Add commentMore actions
+class NewBikesPage{
     
     visit(){
         cy.visit('https://www.zigwheels.com/');
