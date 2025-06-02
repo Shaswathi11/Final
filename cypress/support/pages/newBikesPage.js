@@ -10,19 +10,53 @@ class NewBikesPage{
         cy.get('a[title="All Upcoming Bikes"]').should('have.text', 'Upcoming Bikes').click();
         cy.contains('Honda').should('exist').click();
     }
-    verifyDetails(){
-         // Verify bike details
+    
+    verifyDetails() {
+        // Verify bike details
         cy.get('ul#modelList > .modelItem').each(($el) => {
-        cy.wrap($el).find('[data-track-label="model-name"]').should('be.visible').and('not.be.empty'); // Bike name
-        cy.wrap($el).find('div.b.fnt-15').should('be.visible').and('not.be.empty'); // Price
-        cy.wrap($el).find('div.clr-try.fnt-14').should('be.visible').and('not.be.empty'); // Launch Date
-      });
+          cy.wrap($el).within(() => {
+            cy.get('[data-track-label="model-name"]')
+              .should('be.visible')
+              .and('not.be.empty')
+              .invoke('text')
+              .then((bikeName) => {
+                cy.log('Bike Name: ' + bikeName);
+              });
+        
+            cy.get('div.b.fnt-15')
+              .should('be.visible')
+              .and('not.be.empty')
+              .invoke('text')
+              .then((bikePrice) => {
+                cy.log('Price: ' + bikePrice);
+              });
+        
+            cy.get('div.clr-try.fnt-14')
+              .should('be.visible')
+              .and('not.be.empty')
+              .invoke('text')
+              .then((launchDate) => {
+                cy.log('Launch Date: ' + launchDate);
+              });
+          });
+        });
     }
     searchbar(){
         cy.get('#headerSearch').should('be.visible').as('Searchbar');
         cy.get('@Searchbar').type('Upcoming Honda Bikes');
         cy.wait(10000);
         cy.get('ul#ui-id-1').contains('Upcoming Honda Bikes').should('be.visible').click();
+        // Verify that each card contains "HONDA" in the name
+        cy.get('ul#modelList > .modelItem').each(($el) => {
+          cy.wrap($el).find('[data-track-label="model-name"]')
+            .should('be.visible')
+            .and('not.be.empty')
+            .invoke('text')
+            .then((bikeName) => {
+              expect(bikeName.toUpperCase()).to.include('HONDA'); 
+              cy.log('Bike Name: ' + bikeName);
+            });
+        });
     }
     verifyURL(){
         cy.url().then((currentURL)=>{
