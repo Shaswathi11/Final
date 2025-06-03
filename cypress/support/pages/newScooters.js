@@ -16,5 +16,35 @@ class newScooters{
         cy.log(text.text());
         });
     }
+    visitHomePage() {
+        cy.visit('https://www.zigwheels.com');
+    }
+    
+    clickScootersTab() {
+        cy.get('.container')
+          .find('.row')
+          .find('#headerNewVNavWrap')
+          .contains('SCOOTERS')
+          .click({ force: true });
+    }
+    
+    clickPopularScooters() {
+        cy.get('#zw-cmnSilder').contains('Popular Scooters').click();
+    }
+    
+    selectScooterModels() {
+        cy.wait(500);
+        cy.get('#modelList').find('.col-lg-6').find('#modelId_1').check({ force: true });
+        cy.get('#modelList').find('.col-lg-6').find('#modelId_2').check({ force: true });
+    }
+    
+    compareSelectedBikes() {
+        cy.get('.compareWrap').contains('Compare Selected Bikes').click();
+    }
+    
+    verifyComparisonPage() {
+        cy.wait(6000);
+        cy.url().should('include', 'honda-activa-6g-vs-suzuki-access');
+    }
 }
 export default new newScooters;
