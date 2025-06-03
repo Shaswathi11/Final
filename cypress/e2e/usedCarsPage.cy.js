@@ -35,6 +35,36 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
       usedCarsPage.verifyUrl(testData.expectedUrl);
       usedCarsPage.verifyNoResultsMessage(testData.noResultsMessage);
     });
+
+    it('should match normalized car name from card and detail page', () => {
+      usedCarsPage.visit2();
   
+      // Step 1: Get the first car card and extract the name
+      usedCarsPage.getFirstCarCard().then(($el) => {
+        const fullCardText = $el.text().trim();
+  
+        // Normalize the card name
+        const normalizedCardName = usedCarsPage.normalizeCarName(fullCardText);
+        cy.wrap(normalizedCardName).as('expectedCarName');
+  
+        // Click the card to go to the detail page
+        cy.wrap($el).click();
+      });
+  
+      // Step 2: On the detail page, extract and normalize the car name
+      cy.get('@expectedCarName').then((expectedName) => {
+        cy.url({ timeout: 20000 }).should('include', '/used-car/');
+        usedCarsPage.getCarDetailName()
+          .invoke('text')
+          .then((actualText) => {
+            const normalizedDetailName = usedCarsPage.normalizeCarName(actualText);
+            cy.log('Expected:', expectedName);
+            cy.log('Actual:', normalizedDetailName);
+  
+            // Final assertion
+            expect(normalizedDetailName).to.eq(expectedName);
+          });
+      });
+    });
 
 });
