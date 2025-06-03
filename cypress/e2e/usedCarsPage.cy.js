@@ -8,10 +8,11 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     cy.fixture('usedCarsData').then((data) => {
       testData = data;
     });
-    usedCarsPage.visit();
+    
   });
 
   it('Valid city input shows auto-suggestions', () => {
+    usedCarsPage.visit();
     usedCarsPage.typeCity(testData.validCityPartial);
     usedCarsPage.verifyAutoSuggestionVisible(testData.validCity);
   });
@@ -37,6 +38,10 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     });
 
     it('should match normalized car name from card and detail page', () => {
+      Cypress.on('uncaught:exception', () => {
+        return false;
+       });
+
       usedCarsPage.visit2();
   
       // Step 1: Get the first car card and extract the name
@@ -67,4 +72,20 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
       });
     });
 
+    
+it('should filter used cars based on custom price range', () => {
+  Cypress.on('uncaught:exception', () => {
+     return false;
+    });
+   usedCarsPage.visit3();
+   usedCarsPage.enterCity(testData.validCity);
+   usedCarsPage.waitForLoader();
+   usedCarsPage.selectMinPrice(testData.minPrice);
+   usedCarsPage.waitForLoader(30000);
+   usedCarsPage.selectMaxPrice(testData.maxPrice);
+   usedCarsPage.waitForLoader(20000);
+   usedCarsPage.verifyResultsExist();
+   usedCarsPage.clickFirstCar();
+   usedCarsPage.verifyPriceInRange(testData.min, testData.max);
+   });
 });

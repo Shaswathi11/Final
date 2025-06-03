@@ -40,7 +40,7 @@ class UsedCarsPage {
     
       selectFirstSuggestion() {
         cy.wait(10000);
-        cy.get('li.ui-menu-item a')
+        cy.get('li.ui-menu-item a',{ timeout: 10000 })
           .first()
           .should('be.visible')
           .click();
@@ -75,6 +75,54 @@ class UsedCarsPage {
           .trim()
           .toLowerCase();                        // Case-insensitive comparison
       }
+
+      
+        visit3() {
+          cy.visit('https://www.zigwheels.com/used-car');
+        }
+      
+        enterCity(city) {
+          cy.get('#usedCarCity').clear().type(city).wait(10000);
+          cy.get('li.ui-menu-item').contains(city).should('be.visible').click();
+        }
+      
+        waitForLoader(timeout = 10000) {
+          cy.get('div.usedLoader', { timeout }).should('not.be.visible');
+        }
+      
+        selectMinPrice(price) {
+          cy.get('select.selectBox').eq(0).select(price);
+        }
+      
+        selectMaxPrice(price) {
+          cy.get('select.selectBox').eq(1).select(price);
+        }
+      
+        verifyResultsExist() {
+          cy.get('#data-set-body .zw-sr-searchTarget', { timeout: 20000 }).should('have.length.greaterThan', 0);
+        }
+      
+        clickFirstCar() {
+          cy.get('#data-set-body .zw-sr-searchTarget')
+            .first()
+            .find('a[data-track-component="used-car-listing"]')
+            .should('have.attr', 'href')
+            .then((href) => {
+              cy.visit(href);
+            });
+        }
+      
+        verifyPriceInRange(min, max) {
+          cy.get('.zw-cmn-price')
+            .invoke('text')
+            .then((priceText) => {
+              const trimmedPrice = priceText.trim();
+              const match = trimmedPrice.match(/Rs\.\s*([\d,.]+)/i);
+              const priceInLakhs = parseFloat(match[1].replace(/,/g, ''));
+              expect(priceInLakhs).to.be.within(min, max);
+            });
+        }
+      
 }
 
 export default UsedCarsPage;
