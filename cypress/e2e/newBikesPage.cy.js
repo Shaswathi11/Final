@@ -13,7 +13,25 @@ describe('Upcoming Honda Bikes Listing', () => {
     newBikesPage.verifyURL();
   });
   it('To verify navigate to "Upcoming Honda bike"',()=>{
-    NewBikesPage.visit();
+    Cypress.on('uncaught:exception', (err, runnable) => {
+    
+        return false;
+      });
+    newBikesPage.visit();
+    newBikesPage.navigationtab();
+    newBikesPage.clickingupcomingtab();
+    newBikesPage.clickbrand();
+    newBikesPage.verifytext();
+  });
+
+  it('should list all upcoming Honda bikes under ₹4 lakh', () => {
+    newBikesPage.visit();
+    newBikesPage.navigationtab();
+    newBikesPage.clickingupcomingtab();
+    newBikesPage.clickbrand();
+    newBikesPage.verifyBikePricesUnder4Lakh();
+    });
     
-  })
+
+
 });
