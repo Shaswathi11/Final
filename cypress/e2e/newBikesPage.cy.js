@@ -24,4 +24,14 @@ describe('Upcoming Honda Bikes Listing', () => {
     newBikesPage.verifytext();
   });
 
+  it('should list all upcoming Honda bikes under ₹4 lakh', () => {
+    newBikesPage.visit();
+    newBikesPage.navigationtab();
+    newBikesPage.clickingupcomingtab();
+    newBikesPage.clickbrand();
+    newBikesPage.verifyBikePricesUnder4Lakh();
+    });
+    
+
+
 });

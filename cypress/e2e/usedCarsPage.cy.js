@@ -8,10 +8,11 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     cy.fixture('usedCarsData').then((data) => {
       testData = data;
     });
-    usedCarsPage.visit();
+    
   });
 
   it('Valid city input shows auto-suggestions', () => {
+    usedCarsPage.visit();
     usedCarsPage.typeCity(testData.validCityPartial);
     usedCarsPage.verifyAutoSuggestionVisible(testData.validCity);
   });
@@ -35,6 +36,56 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
       usedCarsPage.verifyUrl(testData.expectedUrl);
       usedCarsPage.verifyNoResultsMessage(testData.noResultsMessage);
     });
-  
 
+    it('should match normalized car name from card and detail page', () => {
+      Cypress.on('uncaught:exception', () => {
+        return false;
+       });
+
+      usedCarsPage.visit2();
+  
+      // Step 1: Get the first car card and extract the name
+      usedCarsPage.getFirstCarCard().then(($el) => {
+        const fullCardText = $el.text().trim();
+  
+        // Normalize the card name
+        const normalizedCardName = usedCarsPage.normalizeCarName(fullCardText);
+        cy.wrap(normalizedCardName).as('expectedCarName');
+  
+        // Click the card to go to the detail page
+        cy.wrap($el).click();
+      });
+  
+      // Step 2: On the detail page, extract and normalize the car name
+      cy.get('@expectedCarName').then((expectedName) => {
+        cy.url({ timeout: 20000 }).should('include', '/used-car/');
+        usedCarsPage.getCarDetailName()
+          .invoke('text')
+          .then((actualText) => {
+            const normalizedDetailName = usedCarsPage.normalizeCarName(actualText);
+            cy.log('Expected:', expectedName);
+            cy.log('Actual:', normalizedDetailName);
+  
+            // Final assertion
+            expect(normalizedDetailName).to.eq(expectedName);
+          });
+      });
+    });
+
+    
+it('should filter used cars based on custom price range', () => {
+  Cypress.on('uncaught:exception', () => {
+     return false;
+    });
+   usedCarsPage.visit3();
+   usedCarsPage.enterCity(testData.validCity);
+   usedCarsPage.waitForLoader();
+   usedCarsPage.selectMinPrice(testData.minPrice);
+   usedCarsPage.waitForLoader(30000);
+   usedCarsPage.selectMaxPrice(testData.maxPrice);
+   usedCarsPage.waitForLoader(20000);
+   usedCarsPage.verifyResultsExist();
+   usedCarsPage.clickFirstCar();
+   usedCarsPage.verifyPriceInRange(testData.min, testData.max);
+   });
 });

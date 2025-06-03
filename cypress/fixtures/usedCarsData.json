@@ -5,6 +5,10 @@
     "expectedTitle": "Used Cars in Chennai ",
     "searchKeyword": "USED CARS IN CHENNAI",
     "expectedUrl": "used-car/Chennai",
-    "noResultsMessage": "No results found for keyword 'used cars in chennai'"
+    "noResultsMessage": "No results found for keyword 'used cars in chennai'",
+    "minPrice":"200000",
+    "maxPrice":"400000",
+    "min":2,
+    "max":4
 }
   
