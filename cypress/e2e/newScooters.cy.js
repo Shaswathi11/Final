@@ -19,4 +19,12 @@ describe('Scooter Review', () => {
     newScooters.compareSelectedBikes();
     newScooters.verifyComparisonPage();
   });
+  it('Scooter page', () => {
+    newScooters.visit();
+    cy.wait(2000);
+    newScooters.goToBestScooters();
+    newScooters.selectScooter('Honda Activa 6G');
+    newScooters.goToSpecifications();
+    newScooters.verifySpecifications();
+  });
 });
