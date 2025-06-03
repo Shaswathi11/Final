@@ -2,7 +2,7 @@ import newsPage from '../support/pages/newsandReviews';
 
 describe('News & Reviews Page: URL and Content Verification', () => {
   beforeEach(() => {
-        Cypress.on('uncaught:exception', () => false);
+    Cypress.on('uncaught:exception', () => false);
   });
 
   it('Navigates to News & Reviews page and verifies URL and content', () => {
