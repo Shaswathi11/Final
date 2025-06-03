@@ -52,5 +52,36 @@ class NewBikesPage{
         should('include', 'Upcoming Honda Bikes');
 
     }
+
+    verifyBikePricesUnder4Lakh() {
+          cy.get('ul#modelList > .modelItem').each(($el) => {
+            cy.wrap($el).within(() => {
+              cy.get('div.b.fnt-15')
+                .should('be.visible')
+                .and('not.be.empty')
+                .invoke('text')
+                .then((bikePrice) => {
+                  const priceMatch = bikePrice.match(/(?:₹|Rs\.)\s*([\d.,]+)\s*(Lakh|Crore|)/i);
+      
+                  if (priceMatch) {
+                    let priceValue = parseFloat(priceMatch[1].replace(/,/g, ''));
+      
+                    if (priceMatch[2]?.toLowerCase() === 'lakh') {
+                      priceValue *= 100000;
+                    } else if (priceMatch[2]?.toLowerCase() === 'crore') {
+                      priceValue *= 10000000;
+                    }
+      
+                    if (priceValue < 400000) {
+                      cy.log(`*** Found a bike under ₹4 lakh: (₹${priceValue}) ***`);
+                    }
+                  } else {
+                    cy.log(`WARNING: Price format not matched for: "${bikePrice}"`);
+                  }
+                });
+            });
+          });
+        }
+     
 }
 export default NewBikesPage;
