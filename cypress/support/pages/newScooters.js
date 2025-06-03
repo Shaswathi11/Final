@@ -43,7 +43,7 @@ class newScooters{
     }
     
     verifyComparisonPage() {
-        cy.wait(6000);
+        cy.wait(20000);
         cy.url().should('include', 'honda-activa-6g-vs-suzuki-access');
     }
 }
