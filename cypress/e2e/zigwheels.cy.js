@@ -1,8 +1,4 @@
-// describe('template spec', () => {
-//   it('passes', () => {
-//     cy.visit('https://example.cypress.io')
-//   })
-// })
+
 
 import './newBikesPage.cy.js';
 import './newsandReviews.cy.js';
