@@ -22,9 +22,9 @@ class UsedCarsPage {
     verifyUsedCarsPageTitle(expectedTitle) {
         cy.get('#usedcarttlID', {timeout:10000}).should('have.text', expectedTitle);
     }
-    
+
     visit1() {
-        cy.visit('https://www.zigwheels.com/');
+        cy.visit('/');
       }
     
       setViewport() {
@@ -52,6 +52,28 @@ class UsedCarsPage {
     
       verifyNoResultsMessage(message) {
         cy.get('body').should('not.contain', message);
+      }
+
+      visit2() {
+        cy.visit('/used-car/Chennai');
+      }
+    
+      getFirstCarCard() {
+        return cy.get('#data-set-body').find('a.zw-sr-headingPadding').first();
+      }
+    
+      getCarDetailName() {
+        return cy.get('h1.mobHeading', { timeout: 20000 }).should('be.visible');
+      }
+    
+      normalizeCarName(name) {
+        return name
+          .replace(/\b\d{4}-\d{4}\b/g, '')       // Remove year ranges like "2016-2019"
+          .replace(/\b\d{4}\b/g, '')             // Remove single years like "2018"
+          .replace(/^(.+?)\s+\1\s+/, '$1 ')      // Remove duplicate brand names
+          .replace(/\s+/g, ' ')                  // Normalize multiple spaces
+          .trim()
+          .toLowerCase();                        // Case-insensitive comparison
       }
 }
 
