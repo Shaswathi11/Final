@@ -46,5 +46,25 @@ class newScooters{
         cy.wait(20000);
         cy.url().should('include', 'honda-activa-6g-vs-suzuki-access');
     }
+
+    selectScooter(scooterName) {
+        cy.get(`a[title="${scooterName}"]`).first().click();
+      }
+
+      goToSpecifications() {
+        cy.get('a[title="Honda Activa 6G Specifications and Features"]').click();
+      }
+    
+      verifySpecifications() {
+        cy.get('table.topSpec', { timeout: 10000 }).should('be.visible');
+        cy.get('h2').contains('Key Specs of Activa 6G').should('be.visible');
+        cy.contains('td.label-spec', 'Engine Displ.').should('be.visible');
+        cy.contains('td.label-spec', 'Mileage').should('be.visible');
+        cy.contains('td.label-spec', 'Max Power').should('be.visible');
+        cy.contains('td.label-spec', 'Fuel Type').should('be.visible');
+      }
+      goToBestScooters() {
+        cy.get('a[href="/newbikes/best-scooters"]').click();
+      }
 }
 export default new newScooters;
