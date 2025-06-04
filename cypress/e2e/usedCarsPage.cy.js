@@ -11,24 +11,24 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     
   });
 
-  it('Valid city input shows auto-suggestions', () => {
+  it('Valid city input shows auto-suggestions',{ tags: ['smoke'] }, () => {
     usedCarsPage.visit();
     usedCarsPage.typeCity(testData.validCityPartial);
     usedCarsPage.verifyAutoSuggestionVisible(testData.validCity);
   });
 
-  it('Invalid city input does not show auto-suggestions', () => {
+  it('Invalid city input does not show auto-suggestions',{ tags: ['smoke'] },  () => {
     usedCarsPage.typeCity(testData.invalidCity);
     usedCarsPage.verifyAutoSuggestionNotVisible(testData.validCity);
   });
   
-  it('Selected city displays corresponding used car listings', () => {
+  it('Selected city displays corresponding used car listings',{ tags: ['smoke'] },  () => {
     usedCarsPage.typeCity(testData.validCityPartial);
     usedCarsPage.selectCity(testData.validCity);
     usedCarsPage.verifyUsedCarsPageTitle(testData.expectedTitle);
   });
 
-  it('Test case - Select suggestion using uppercase input', () => {
+  it('Test case - Select suggestion using uppercase input' ,{ tags: ['smoke'] },  () => {
       usedCarsPage.visit1();
       usedCarsPage.setViewport();
       usedCarsPage.typeSearchKeyword(testData.searchKeyword);
@@ -37,7 +37,7 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
       usedCarsPage.verifyNoResultsMessage(testData.noResultsMessage);
     });
 
-    it('should match normalized car name from card and detail page', () => {
+    it('should match normalized car name from card and detail page',{ tags: ['regression'] },  () => {
       Cypress.on('uncaught:exception', () => {
         return false;
        });
@@ -73,7 +73,7 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     });
 
     
-it('should filter used cars based on custom price range', () => {
+it('should filter used cars based on custom price range',{ tags: ['regression'] },  () => {
   Cypress.on('uncaught:exception', () => {
      return false;
     });
