@@ -1,4 +1,4 @@
-import newScooters from '../support/pages/newScooters.js';
+import newScooters from '../support/pages/NewScooters.js';
  
 describe('Scooter Review', () => {
   beforeEach(() => {

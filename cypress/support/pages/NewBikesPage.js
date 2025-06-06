@@ -15,7 +15,7 @@ class NewBikesPage{
       // Verify bike details
       cy.get('ul#modelList > .modelItem').each(($el) => {
         cy.wrap($el).within(() => {
-          cy.get('[data-track-label="model-name"]')
+          cy.get('[data-track-label="model-name"]')  
             .should('be.visible')
             .and('not.be.empty')
             .invoke('text')

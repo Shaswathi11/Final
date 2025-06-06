@@ -1,4 +1,4 @@
-import UsedCarsPage from '../support/pages/usedCarsPage';
+import UsedCarsPage from '../support/pages/UsedCarsPage';
 
 const usedCarsPage = new UsedCarsPage();
 let testData = {};
@@ -8,7 +8,6 @@ describe('Used Cars Page: City Filter and Listing Verification', () => {
     cy.fixture('usedCarsData').then((data) => {
       testData = data;
     });
-    
   });
 
   it('Valid city input shows auto-suggestions',{ tags: ['smoke'] }, () => {
