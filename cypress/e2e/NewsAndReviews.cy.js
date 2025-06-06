@@ -1,4 +1,4 @@
-import newsPage from '../support/pages/newsandReviews';
+import newsPage from '../support/pages/NewsAndReviews';
 
 describe('News & Reviews Page: URL and Content Verification', () => {
   beforeEach(() => {

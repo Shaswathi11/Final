@@ -1,4 +1,4 @@
-import UsedCarsPage from '../support/pages/usedCarsPage';
+import UsedCarsPage from '../support/pages/UsedCarsPage';
 
 const usedCarsPage = new UsedCarsPage();
 let testData = {};
