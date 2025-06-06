@@ -5,7 +5,7 @@ describe('News & Reviews Page: URL and Content Verification', () => {
     Cypress.on('uncaught:exception', () => false);
   });
 
-  it('Navigates to News & Reviews page and verifies URL and content', () => {
+  it('Navigates to News & Reviews page and verifies URL and content',{ tags: ['smoke'] },  () => {
     newsPage.visit();
     newsPage.clickNewsReviews();
     newsPage.verifyUrlContainsNews();

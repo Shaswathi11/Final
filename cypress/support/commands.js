@@ -25,3 +25,4 @@
 // Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
 import './commands'
 import 'cypress-mochawesome-reporter/register'
+require('cypress-grep')()

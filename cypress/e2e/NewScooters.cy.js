@@ -6,12 +6,12 @@ describe('Scooter Review', () => {
       return false;
     });
   });
-  it('TC_18', () => {
+  it('verify Scooter details',  () => {
     newScooters.visit();
     newScooters.navigation();
     newScooters.firstScooterReview();
   });
-  it('should compare scooters correctly', () => {
+  it('should compare scooters correctly' ,{ tags: ['regression'] }, () => {
     newScooters.visitHomePage();
     newScooters.clickScootersTab();
     newScooters.clickPopularScooters();

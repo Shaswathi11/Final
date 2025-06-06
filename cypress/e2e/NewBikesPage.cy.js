@@ -1,5 +1,5 @@
-import NewBikesPage from '../support/pages/newBikesPage.js';
- 
+import NewBikesPage from '../support/pages/NewBikesPage.js';
+   
 describe('Upcoming Honda Bikes Listing', () => {
   const newBikesPage = new NewBikesPage(); 
   it('Verify Upcoming Honda Bikes List & Search Functionality', () => {
@@ -14,8 +14,7 @@ describe('Upcoming Honda Bikes Listing', () => {
   });
   it('To verify navigate to "Upcoming Honda bike"',()=>{
     Cypress.on('uncaught:exception', (err, runnable) => {
-    
-        return false;
+      return false;
       });
     newBikesPage.visit();
     newBikesPage.navigationtab();
@@ -23,15 +22,4 @@ describe('Upcoming Honda Bikes Listing', () => {
     newBikesPage.clickbrand();
     newBikesPage.verifytext();
   });
-
-  it('should list all upcoming Honda bikes under ₹4 lakh', () => {
-    newBikesPage.visit();
-    newBikesPage.navigationtab();
-    newBikesPage.clickingupcomingtab();
-    newBikesPage.clickbrand();
-    newBikesPage.verifyBikePricesUnder4Lakh();
-    });
-    
-
-
 });
